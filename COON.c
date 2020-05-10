@@ -100,8 +100,9 @@ char explode2[] = {
 
 
 char music[] = "E:d=5,o=4,b=250:2f5,4a5,4b5,5d6,3c6,3a5,4f5,4d5,2b4,2c5";
-
-
+/*snd_expl emprunté au jeu "space fighter"*/
+char snd_expl[] = "s:d=4,o=4,b=900:8d#,4c#7,16f#,32f,16a#,32g,16b,32g#,16a#,32f#,16a,32a#,16f#,32g,16f,32d#,32f#,16e,32c#,16d#,8c#,8c,8d,8c#,16d,32c,8d#,8d#";
+char snd_donut[] = "E:d=5,o=4,b=250:15a5,15b5,15d6";
 char ground[] = {
 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 
 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 
@@ -246,6 +247,8 @@ void donutcollision(int n)
 		// Si collision avec le sprite 'homer', le donut disparait.
 			
 		spritesetvalue(n, S_LIVES, 0);
+		loadrtttl(snd_donut, 0);
+		playrtttl();
 		countdonut --;
 
 	}	
@@ -277,7 +280,10 @@ void uraniumcollision(int n)
 		putsprite(n, spritegetvalue(n, S_X) - 4, spritegetvalue(n, S_Y) - 4); 		// On recentre le sprite.
 		
 		// BOOM 
+		
 		getsprite(n, explode1);
+		loadrtttl(snd_expl, 0);
+		playrtttl();
 		delayredraw();
 		delayredraw();
 		delayredraw();
