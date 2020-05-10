@@ -56,8 +56,8 @@ char uranium[] = {
 0x00, 0xd5, 0x55, 0x90, 
 0x0d, 0x55, 0x59, 0x00, 
 0xd5, 0x55, 0x59, 0x00, 
-0xd5, 0x55, 0x90, 0x00, 
-0xd9, 0x99, 0x00, 0x00
+0x05, 0x55, 0x90, 0x00, 
+0x00, 0x99, 0x00, 0x00
 };
 
 char explode1[] = {
@@ -179,7 +179,7 @@ void burnscollision(int n)
 }
 
 /*
-*	Methode de collision des sprites 'homer'.
+*	Methode de collision du sprites 'homer'.
 *	Si collision avec burns, la partie est perdue.
 *
 */
@@ -494,7 +494,7 @@ void firstscreen()
 	printf("Catch the donuts!");
 	gotoxy(3, 14);
 	printf("Press any key...");
-	settimer(2, 1000);
+	settimer(2, 700);
 	
 	while (getkey() == 0 || gettimer(2))
 	{		
@@ -502,15 +502,16 @@ void firstscreen()
 	
 	gotoxy(4, 4);
 	printf("Avoid Mr.Burns!");
-	settimer(2, 1000);
+	settimer(2, 700);
 	
 	while (getkey() == 0 || gettimer(2))
 	{		
+				
 	}
 	
 	gotoxy(2, 5);
 	printf("Avoid the uranium!");
-	settimer(2, 1000);
+	settimer(2, 700);
 	
 	while (getkey() == 0 || gettimer(2))
 	{		
@@ -520,7 +521,7 @@ void firstscreen()
 	printf("Finish before");
 	gotoxy(3, 8);
 	printf("the timer ends!");
-	settimer(2, 1000);
+	settimer(2, 700);
 	
 	while (getkey() == 0 || gettimer(2))
 	{		
@@ -528,7 +529,7 @@ void firstscreen()
 	
 	gotoxy(2, 10);
 	printf("Use arrows to move");
-	settimer(2, 1000);
+	settimer(2, 700);
 	
 	while (getkey() == 0 || gettimer(2))
 	{		
