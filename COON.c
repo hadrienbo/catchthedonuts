@@ -103,6 +103,7 @@ char music[] = "E:d=5,o=4,b=250:2f5,4a5,4b5,5d6,3c6,3a5,4f5,4d5,2b4,2c5";
 /*snd_expl emprunté au jeu "space fighter"*/
 char snd_expl[] = "s:d=4,o=4,b=900:8d#,4c#7,16f#,32f,16a#,32g,16b,32g#,16a#,32f#,16a,32a#,16f#,32g,16f,32d#,32f#,16e,32c#,16d#,8c#,8c,8d,8c#,16d,32c,8d#,8d#";
 char snd_donut[] = "E:d=5,o=4,b=250:15a5,15b5,15d6";
+char burns_laugh[] = "B:d=2,o=1,b=2000:10c6 10f5 10c4 10d5 10c4 10d5 10c4 10d5 10c4 10d5";
 char ground[] = {
 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 
 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 0x6c, 0xcc, 0xcc, 0xcc, 
@@ -172,8 +173,22 @@ int isTimeover=0;
 */
 void burnscollision(int n)
 {
-	if(spritegetvalue(n, S_COLLISION) == 1 )
-	{            
+	
+	if(spritegetvalue(n, S_COLLISION) == 1 && didIWin)
+	{	
+		loadrtttl(burns_laugh, 0);
+		playrtttl();
+		
+		spritesetvalue(n, S_SPEEDX,  0));
+		delayredraw();
+		delayredraw();
+		delayredraw();
+		delayredraw();
+		delayredraw();
+		delayredraw();
+		delayredraw();
+		delayredraw();   
+		 
 		didIWin = 0;
 	}	
 }
@@ -448,6 +463,7 @@ void printTime()
 		{
 			isTimeover=1;
 			didIWin=0;
+			isTimeover=0;
 		}
     }
 }
