@@ -353,12 +353,16 @@ void init()
 		if( i <= countdonut + 2)
 		{
 			getsprite(i, donut);
+			spritesetvalue(i, S_WIDTH, 8);
+			spritesetvalue(i, S_HEIGHT, 8);
 			spritesetvalue(i, S_ON_COLLISION, donutcollision);		
 		}			
 		else
 		{
 			// 1/3 des sprites sera des barres d'uraniums.
-			getsprite(i, uranium);
+			getsprite(i, uranium);			
+			spritesetvalue(i, S_WIDTH, 8);
+			spritesetvalue(i, S_HEIGHT, 8);
 			spritesetvalue(i, S_ON_COLLISION, uraniumcollision);
 		}
 		putsprite(i, xi , yi);
@@ -549,6 +553,7 @@ void end()
 	clearscreen();
 	if(didIWin == 1)
 	{
+		gotoxy(6, 2);
 		puts("you win!!");
 		gotoxy(7, 4);
 		printf("score: %d", score);
@@ -556,10 +561,21 @@ void end()
 
 	else
 	{
+		gotoxy(6, 2);
 		puts("you lose!!");
 		gotoxy(7, 4);
 		printf("score: %d", score);
 	}
+	
+	gotoxy(1, 12);
+	printf("To play another game");
+	gotoxy(4, 13);
+	printf("press any key ");
+	settimer(2, 700);
+	
+	while (getkey() == 0 || gettimer(2))
+	{		
+	}	
 }
 
 
@@ -567,24 +583,31 @@ void end()
 
 void main()
 {
-	firstscreen();
-	while( level <= levelmax  && isTimeover==0 && didIwin)
+	while (1)
 	{
-    	init();
-
-    	while(countdonut > 0 && isTimeover==0 && didIwin)
-		{
-			printTime();
-    	    step();	
-    	    draw();
-    	}		
-		clearsprites()
+		level = 0;
+		didIwin = 1;
+		score = 0;
 		
-		if (didIwin == 1)
-			score += (maxtime - time);
-		level++;
-		time = 0;
-	}
+		firstscreen();
+		while( level <= levelmax  && isTimeover==0 && didIwin)
+		{
+    		init();
 	
-	end();
+    		while(countdonut > 0 && isTimeover==0 && didIwin)
+			{
+				printTime();
+    		    step();	
+    		    draw();
+    		}		
+			clearsprites()
+			
+			if (didIwin == 1)
+				score += (maxtime - time);
+			level++;
+			time = 0;
+		}
+	
+		end();
+	}
 }
