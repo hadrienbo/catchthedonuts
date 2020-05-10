@@ -307,7 +307,7 @@ void uraniumcollision(int n)
 *
 */
 void init()
-{
+{	
 	clearscreen();
 	loadrtttl(music,0);
 	playrtttl();
@@ -317,12 +317,13 @@ void init()
 	gotoxy(7, 6);	
 	printf("Level %d", level + 1);
 	
-	countdonut = tabdonutlevel[level];
-	countsprite = countdonut + taburaniumlevel[level];
-	
-	while (getkey() == 0)
+	settimer(2, 1000);
+	while (getkey() == 0 || gettimer(2))
 	{
 	}
+	
+	countdonut = tabdonutlevel[level];
+	countsprite = countdonut + taburaniumlevel[level];
 
 	clearscreen();
 
@@ -363,6 +364,7 @@ void init()
 	spritesetvalue(2, S_ON_COLLISION, homercollision);
 	spritesetvalue(2, S_ON_COLLISION, burnscollision);
 	spritesetvalue(2, S_ON_EXIT_SCREEN, burnsexitscreen);
+	spritesetvalue(2, S_FLIP_HORIZONTAL, 0);
 	
 	putsprite(2, 132, 20 + random(92));
 
@@ -476,6 +478,60 @@ void clearsprites()
 
 
 /*
+*	Affiche l'ecran de debut.
+*
+*/
+void firstscreen()
+{
+	clearscreen();
+	gotoxy(3, 3);
+	printf("Catch the donuts!");
+	gotoxy(3, 14);
+	printf("Press any key...");
+	settimer(2, 1000);
+	
+	while (getkey() == 0 || gettimer(2))
+	{		
+	}
+	
+	gotoxy(4, 4);
+	printf("Avoid Mr.Burns!");
+	settimer(2, 1000);
+	
+	while (getkey() == 0 || gettimer(2))
+	{		
+	}
+	
+	gotoxy(2, 5);
+	printf("Avoid the uranium!");
+	settimer(2, 1000);
+	
+	while (getkey() == 0 || gettimer(2))
+	{		
+	}
+	
+	gotoxy(4, 7);
+	printf("Finish before");
+	gotoxy(3, 8);
+	printf("the timer ends!");
+	settimer(2, 1000);
+	
+	while (getkey() == 0 || gettimer(2))
+	{		
+	}
+	
+	gotoxy(2, 10);
+	printf("Use arrows to move");
+	settimer(2, 1000);
+	
+	while (getkey() == 0 || gettimer(2))
+	{		
+	}
+}
+
+
+
+/*
 *	Affiche l'ecran de fin.
 *
 */
@@ -504,6 +560,7 @@ void end()
 
 void main()
 {
+	firstscreen();
 	while( level <= levelmax  && isTimeover==0 && didIwin)
 	{
     	init();
